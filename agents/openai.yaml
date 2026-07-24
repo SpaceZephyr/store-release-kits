@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chrome 插件商店物料"
+  short_description: "从插件仓库生成图标、截图、宣传图、商店文案与隐私政策"
+  default_prompt: "使用 $chrome-extension-store-kit 审计这个 Chrome 插件仓库并生成可提交商店的完整物料包。"
