@@ -1,0 +1,24 @@
+# Apple build and signing
+DerivedData/
+build/
+*.xcarchive
+*.ipa
+*.dSYM.zip
+*.mobileprovision
+*.p12
+*.cer
+AuthKey_*.p8
+
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+release-assets/source/
+
+# User-specific Xcode files
+xcuserdata/
+*.xcuserstate
+

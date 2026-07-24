@@ -1,0 +1,33 @@
+{
+  "app_icon": {
+    "glob": "brand/*",
+    "required": true,
+    "square": true,
+    "sizes": [],
+    "formats": ["PNG", "JPEG"],
+    "max_bytes": null
+  },
+  "screenshots": {
+    "glob": "screenshots/*",
+    "min_count": 3,
+    "max_count": 5,
+    "sizes": [],
+    "formats": ["PNG", "JPEG"],
+    "same_dimensions": true,
+    "max_bytes": null
+  },
+  "share_card": {
+    "glob": "promotion/share-card.*",
+    "required": false,
+    "sizes": [],
+    "formats": ["PNG", "JPEG"],
+    "max_bytes": null
+  },
+  "miniprogram_code_poster": {
+    "glob": "promotion/miniprogram-code-poster.*",
+    "required": false,
+    "sizes": [],
+    "formats": ["PNG", "JPEG"],
+    "max_bytes": null
+  }
+}

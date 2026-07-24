@@ -1,0 +1,11 @@
+# WeChat Mini Program local/private files
+project.private.config.json
+private.*.key
+*.pem
+.env
+.env.*
+
+# Local reports and editable masters
+release-assets/source/
+*.log
+__pycache__/

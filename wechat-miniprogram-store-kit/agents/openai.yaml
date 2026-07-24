@@ -1,0 +1,4 @@
+interface:
+  display_name: "微信小程序发布 Kit"
+  short_description: "从小程序仓库生成品牌素材、审核文案、隐私说明与发布检查包"
+  default_prompt: "使用 $wechat-miniprogram-store-kit 审计这个微信小程序仓库并生成完整发布物料。"

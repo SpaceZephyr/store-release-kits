@@ -1,0 +1,60 @@
+{
+  "app_icon_master": {
+    "glob": "brand/app-icon-master.*",
+    "required": true,
+    "min_count": 1,
+    "max_count": 1,
+    "square": true,
+    "no_alpha": true,
+    "sizes": [[1024, 1024]],
+    "formats": ["PNG"]
+  },
+  "iphone_6_9_zh_hans": {
+    "glob": "screenshots/zh-Hans/iphone-6.9/*",
+    "required": true,
+    "min_count": 3,
+    "max_count": 10,
+    "no_alpha": true,
+    "same_dimensions": true,
+    "sizes": [
+      [1260, 2736],
+      [2736, 1260],
+      [1290, 2796],
+      [2796, 1290],
+      [1320, 2868],
+      [2868, 1320]
+    ],
+    "formats": ["PNG", "JPEG"]
+  },
+  "ipad_13_zh_hans": {
+    "glob": "screenshots/zh-Hans/ipad-13/*",
+    "required": false,
+    "min_count": 0,
+    "max_count": 10,
+    "no_alpha": true,
+    "same_dimensions": true,
+    "sizes": [
+      [2064, 2752],
+      [2752, 2064],
+      [2048, 2732],
+      [2732, 2048]
+    ],
+    "formats": ["PNG", "JPEG"]
+  },
+  "mac": {
+    "glob": "screenshots/zh-Hans/mac/*",
+    "required": false,
+    "min_count": 0,
+    "max_count": 10,
+    "no_alpha": true,
+    "same_dimensions": true,
+    "sizes": [
+      [1280, 800],
+      [1440, 900],
+      [2560, 1600],
+      [2880, 1800]
+    ],
+    "formats": ["PNG", "JPEG"]
+  }
+}
+

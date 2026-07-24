@@ -1,0 +1,22 @@
+{
+  "locale": "zh-Hans",
+  "name": "[2-30 个字符]",
+  "subtitle": "[最多 30 个字符]",
+  "promotional_text": "[最多 170 个字符]",
+  "description": "[最多 4000 个字符的纯文本说明]",
+  "keywords": "[关键词1,关键词2]",
+  "whats_new": "[本版本面向用户的更新说明]",
+  "support_url": "https://example.com/support",
+  "marketing_url": "https://example.com",
+  "privacy_policy_url": "https://example.com/privacy",
+  "privacy_choices_url": "https://example.com/privacy/choices",
+  "category_primary": "[分类]",
+  "category_secondary": "",
+  "copyright": "[年份] [权利人]",
+  "review_contact": {
+    "first_name": "[名字]",
+    "last_name": "[姓氏]",
+    "email": "[可及时联系的邮箱]",
+    "phone": "[含国家/地区代码]"
+  }
+}
