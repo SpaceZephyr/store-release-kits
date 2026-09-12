@@ -5,7 +5,7 @@
 <p align="center"><em>「代码写完以后，把上架这件事也认真做完。」</em></p>
 
 <p align="center">
-  <img alt="skills" src="https://img.shields.io/badge/Skills-3-111111">
+  <img alt="skills" src="https://img.shields.io/badge/Skills-4-111111">
   <img alt="platforms" src="https://img.shields.io/badge/Platforms-Chrome%20%7C%20WeChat%20%7C%20App%20Store-0A84FF">
   <img alt="output" src="https://img.shields.io/badge/Output-Release%20Kit-5856D6">
   <img alt="runtime" src="https://img.shields.io/badge/Runtime-Python%203-34C759">
@@ -14,6 +14,8 @@
 <p align="center">
   License：未声明 · Codex Skills · <a href="https://github.com/SpaceZephyr/store-release-kits/issues">Issues</a>
 </p>
+
+前三个负责「把材料准备齐」，第四个负责「把截图变成能上架的宣传图」。
 
 Store Release Kits 是一组面向应用上架的 Codex Skills。给它一个真实仓库，它会先读代码和配置，再准备图标、截图、商店文案、隐私政策、审核说明与发布检查包。
 
@@ -26,6 +28,7 @@ Store Release Kits 是一组面向应用上架的 Codex Skills。给它一个真
 | [`chrome-extension-store-kit`](chrome-extension-store-kit/) | Chrome Web Store | 多尺寸图标、3 张以上截图、宣传图块、商店文案、权限理由、隐私政策、发布 ZIP |
 | [`wechat-miniprogram-store-kit`](wechat-miniprogram-store-kit/) | 微信小程序 | 小程序图标、功能截图、审核资料、隐私保护指引矩阵、域名与资质检查、发布物料包 |
 | [`app-store-release-kit`](app-store-release-kit/) | Apple App Store | App 图标、多设备截图、App Store 元数据、App Privacy、Review Notes、TestFlight 与发布检查 |
+| [`store-promo-shots`](store-promo-shots/) | 以上三个平台 + 网页 | 把真实截图批量合成成宣传图：八种版式、六套主题、一次出全套尺寸 |
 
 ## 安装
 

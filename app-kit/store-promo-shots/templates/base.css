@@ -1,0 +1,142 @@
+/* 商店宣传图的共用样式。
+   设备框、徽章、背景全部用 CSS 画，不依赖任何图片素材，
+   所以换个品牌色就是改一个变量，不用重做一套图。 */
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:var(--W);height:var(--H);overflow:hidden}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+.root{width:100%;height:100%;position:relative}
+.wrap{width:100%;height:100%;padding:var(--pad);display:flex;flex-direction:column;
+  align-items:center;position:relative;overflow:hidden}
+.wrap.center{justify-content:center;gap:calc(var(--pad)*.6)}
+.wrap.top{justify-content:flex-start}
+.wrap.bottom{justify-content:flex-end}
+.wrap.full{padding:0}
+
+/* ---------- 文案 ---------- */
+.copy{text-align:center;width:100%;flex:none;z-index:3}
+.copy h1{font-weight:800;line-height:1.18;letter-spacing:-.02em;text-wrap:balance;
+  color:var(--fg)}
+.copy h1 b{font-weight:800}
+/* 混字重的写法：非加粗部分退到常规字重，加粗的那几个词自己跳出来 */
+.copy h1:has(b){font-weight:400}
+.copy p{margin-top:.55em;font-weight:500;line-height:1.5;color:var(--sub);
+  max-width:82%;margin-left:auto;margin-right:auto}
+
+.wordmark{position:absolute;left:0;right:0;bottom:calc(var(--pad)*.55);text-align:center;
+  font-size:calc(var(--H)*.026);font-weight:700;letter-spacing:.02em;color:var(--fg);
+  opacity:.92;z-index:4}
+
+/* ---------- 设备框 ---------- */
+.stage{flex:1;width:100%;display:flex;align-items:center;justify-content:center;
+  min-height:0;padding-top:calc(var(--pad)*.5)}
+/* 容器不够高时让设备按高度缩，别撑出画面 */
+.stage .dev{height:100%;width:auto;max-width:calc(var(--W)*var(--w))}
+.stagebleed{flex:1;width:100%;display:flex;align-items:flex-start;justify-content:center;
+  min-height:0;margin-top:calc(var(--pad)*.7);margin-bottom:calc(var(--pad)*-2)}
+
+.dev{width:calc(var(--W)*var(--w));flex:none;position:relative}
+.dev.phone{aspect-ratio:9/19.5}
+.dev.browser{aspect-ratio:16/10}
+.dev .scr{position:absolute;inset:0;overflow:hidden;background:#fff}
+.dev img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.dev .blank{width:100%;height:100%;background:linear-gradient(160deg,#e9edf4,#d7dee9)}
+.dev .notch{position:absolute;top:2.1%;left:50%;transform:translateX(-50%);
+  width:30%;height:2.4%;background:#0b0c0f;border-radius:999px;z-index:2}
+
+.dev.black{background:#0b0c0f;border-radius:calc(var(--W)*var(--w)*.115);
+  padding:calc(var(--W)*var(--w)*.022);
+  box-shadow:0 calc(var(--H)*.016) calc(var(--H)*.04) rgba(0,0,0,.30)}
+.dev.black .scr{inset:calc(var(--W)*var(--w)*.022);
+  border-radius:calc(var(--W)*var(--w)*.095)}
+
+.dev.white{background:#fff;border-radius:calc(var(--W)*var(--w)*.115);
+  padding:calc(var(--W)*var(--w)*.016);
+  box-shadow:0 calc(var(--H)*.016) calc(var(--H)*.04) rgba(0,0,0,.22)}
+.dev.white .scr{inset:calc(var(--W)*var(--w)*.016);
+  border-radius:calc(var(--W)*var(--w)*.10)}
+.dev.white .notch{background:#0b0c0f;height:1.7%;width:24%;top:1.6%}
+
+.dev.bare{border-radius:calc(var(--W)*var(--w)*.055);overflow:hidden;
+  box-shadow:0 calc(var(--H)*.014) calc(var(--H)*.035) rgba(0,0,0,.20)}
+.dev.bare.phone{aspect-ratio:9/19.5}
+.dev.bare.browser{aspect-ratio:16/10}
+
+/* 浏览器窗口：给网页应用和 Chrome 扩展用 */
+.dev.browser{background:#eceff4;border-radius:calc(var(--W)*var(--w)*.026);overflow:hidden;
+  box-shadow:0 calc(var(--H)*.02) calc(var(--H)*.05) rgba(0,0,0,.26);display:flex;
+  flex-direction:column}
+.dev.browser.black{background:#2a2f39}
+.dev.browser .chrome{height:9%;flex:none;display:flex;align-items:center;
+  gap:calc(var(--W)*var(--w)*.012);padding:0 calc(var(--W)*var(--w)*.02)}
+.dev.browser .chrome i{width:calc(var(--W)*var(--w)*.016);aspect-ratio:1;border-radius:50%;
+  background:#c3c9d4;display:block;flex:none}
+.dev.browser.black .chrome i{background:#525a68}
+.dev.browser .chrome .url{flex:1;height:52%;margin-left:calc(var(--W)*var(--w)*.018);
+  border-radius:999px;background:#fff}
+.dev.browser.black .chrome .url{background:#1b1f27}
+.dev.browser .scr{position:relative;inset:auto;flex:1;min-height:0;border-radius:0}
+.dev.browser img{object-position:top center}
+
+/* 倾斜：单张里最抓眼的一种，序列里别连用两张 */
+.stagebleed.tilt{perspective:calc(var(--W)*2.2)}
+.stagebleed.tilt .dev{transform:rotateY(-19deg) rotateX(5deg) rotateZ(-4deg)
+  translateX(calc(var(--W)*.04));transform-origin:50% 0%}
+
+/* 多台叠放 */
+.stagebleed.stack{position:relative;align-items:flex-start}
+.stagebleed.stack .dev{position:absolute;top:0;left:50%;margin-left:calc(var(--W)*var(--w)*-.5)}
+.stagebleed.stack .s0{transform:translate(calc(var(--W)*-.21),calc(var(--H)*.04)) rotate(-8deg) scale(.9);z-index:1}
+.stagebleed.stack .s1{z-index:3}
+.stagebleed.stack .s2{transform:translate(calc(var(--W)*.21),calc(var(--H)*.04)) rotate(8deg) scale(.9);z-index:2}
+
+/* ---------- 全出血 ---------- */
+.bleedimg{position:absolute;inset:0}
+.bleedimg img{width:100%;height:100%;object-fit:cover;object-position:center}
+.wrap.full .overlay{position:absolute;left:0;right:0;top:0;padding:var(--pad);
+  z-index:3;background:linear-gradient(180deg,var(--bg) 0%,var(--bg) 62%,transparent 100%)}
+.wrap.full .overlay .copy{text-align:center}
+
+/* ---------- 前后对比 ---------- */
+.ba{flex:1;width:100%;display:flex;flex-direction:column;gap:calc(var(--pad)*.22);
+  margin-top:calc(var(--pad)*.7);min-height:0}
+.ba .half{flex:1;position:relative;overflow:hidden;border-radius:calc(var(--W)*.035);
+  min-height:0}
+.ba .half img{width:100%;height:100%;object-fit:cover}
+.ba .tagba{position:absolute;left:calc(var(--W)*.03);top:calc(var(--W)*.03);
+  font-size:calc(var(--W)*.028);font-weight:700;letter-spacing:.08em;color:#fff;
+  background:rgba(0,0,0,.45);padding:.3em .7em;border-radius:.4em}
+
+/* ---------- 徽章 ---------- */
+.badge{display:flex;align-items:center;justify-content:center;gap:.2em;
+  margin-top:calc(var(--pad)*.5);z-index:4;flex:none}
+.badge .lf{font-size:calc(var(--H)*.036);line-height:1;filter:grayscale(1) brightness(.4)}
+.badge .lf.flip{transform:scaleX(-1)}
+.badge .bt{text-align:center;padding:0 .25em}
+.badge em{display:block;font-style:normal;font-size:calc(var(--H)*.0145);font-weight:600;
+  letter-spacing:.06em;color:var(--fg);opacity:.85}
+.badge i{display:block;font-style:normal;font-size:calc(var(--H)*.019);font-weight:800;
+  letter-spacing:.01em;color:var(--fg)}
+
+/* ---------- 横版（Chrome 推广图、OG 图、网页首图）---------- */
+.root.land .wrap{flex-direction:row;align-items:center;gap:calc(var(--pad)*.9);
+  justify-content:center;text-align:left}
+.root.land .copy{text-align:left;width:auto;flex:1;max-width:52%}
+.root.land .copy p{margin-left:0;max-width:92%}
+.root.land .copy h1{text-wrap:pretty}
+.root.land .stage,
+.root.land .stagebleed{flex:none;width:auto;margin:0;padding:0;align-items:center;
+  height:100%}
+.root.land .dev{width:auto;max-width:none}
+.root.land .dev.browser{height:86%}
+.root.land .dev.phone{height:132%}
+.root.land .stage,
+.root.land .stagebleed{align-items:flex-end;margin:0;padding:0}
+.root.land .stagebleed{margin-bottom:calc(var(--pad)*-1)}
+.root.land .badge{position:absolute;right:var(--pad);top:var(--pad);margin:0}
+.root.land .wordmark{left:var(--pad);right:auto;text-align:left;
+  bottom:calc(var(--pad)*.5)}
+.root.land .wrap.center .copy{max-width:100%;text-align:center;flex:none}
+.root.land .ba{flex-direction:row}

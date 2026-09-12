@@ -1,0 +1,59 @@
+{
+  "product": {
+    "name": "产品名",
+    "tagline": "一句话说清楚这是什么"
+  },
+  "shots_dir": "shots",
+  "output": "promo-out",
+  "theme": {
+    "preset": "brand",
+    "bg": "#FFD400",
+    "fg": "#0B1E3D",
+    "sub": "#3A4A69",
+    "device": "white",
+    "font": "sans"
+  },
+  "sizes": [
+    "iphone-6.9"
+  ],
+  "slides": [
+    {
+      "layout": "statement",
+      "headline": "你好，\\n我们是**产品名**。",
+      "wordmark": "yourdomain.com"
+    },
+    {
+      "layout": "headline-top-bleed",
+      "headline": "最强的那个功能\\n一句话说完",
+      "sub": "具体到能想象出画面的那种描述",
+      "shot": "01.png",
+      "badge": null
+    },
+    {
+      "layout": "headline-top-float",
+      "headline": "第二个功能",
+      "shot": "02.png",
+      "theme": {
+        "preset": "dark"
+      }
+    },
+    {
+      "layout": "tilted",
+      "headline": "差异化的点",
+      "sub": "为什么是你不是别人",
+      "shot": "03.png"
+    },
+    {
+      "layout": "stack",
+      "headline": "不止一个界面",
+      "shot": "01.png",
+      "shots": [
+        "02.png",
+        "03.png"
+      ],
+      "theme": {
+        "preset": "gradient"
+      }
+    }
+  ]
+}

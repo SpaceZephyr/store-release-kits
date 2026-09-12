@@ -1,0 +1,4 @@
+interface:
+  display_name: "商店宣传图批量合成"
+  short_description: "把真实截图批量合成成 App Store / 小程序 / Chrome / 网页要的宣传图"
+  default_prompt: "使用 $store-promo-shots 把这批截图做成全套商店宣传图。"
