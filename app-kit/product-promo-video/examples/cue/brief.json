@@ -1,0 +1,117 @@
+{
+  "name": "cue",
+  "product": {
+    "name": "Cue",
+    "slogan": "你的专属 Agent，随时 Cue。",
+    "url": "https://cue.im/",
+    "logo": "brand/logo-1-raw.svg",
+    "logoMono": false,
+    "colors": {
+      "accent": "#429DFA",
+      "accent2": "#F2545B"
+    }
+  },
+  "style": "neo-brutal",
+  "format": "16:9",
+  "captions": true,
+  "voice": {
+    "engine": "auto"
+  },
+  "bgm": "auto",
+  "scenes": [
+    {
+      "type": "logo",
+      "tagline": "你的专属 Agent，随时 Cue。",
+      "say": "Cue。你的专属 Agent，随时 Cue。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "BY MANUS",
+      "title": "生活里的事\n**交给 Cue**",
+      "sub": "无论生活带来什么，Cue 都在这里帮你处理",
+      "say": "无论生活里遇到什么事，Cue 都能帮你处理。"
+    },
+    {
+      "type": "cards",
+      "title": "每个 Agent 都有**自己的身份**",
+      "items": [
+        {
+          "icon": "phone",
+          "label": "电话",
+          "desc": "用自己的号码打电话、发消息"
+        },
+        {
+          "icon": "mail",
+          "label": "邮箱",
+          "desc": "用自己的地址收发邮件"
+        },
+        {
+          "icon": "wallet",
+          "label": "钱包",
+          "desc": "在你设定的权限内付款"
+        },
+        {
+          "icon": "monitor",
+          "label": "电脑",
+          "desc": "在专属工作区里用应用和工具"
+        }
+      ],
+      "say": "每个 Agent 都有自己的电话、邮箱、钱包和电脑。"
+    },
+    {
+      "type": "feature",
+      "kicker": "多端可用",
+      "title": "手机和电脑\n**都能用**",
+      "sub": "macOS、Windows 和手机，\n给它一个提示，它就开始工作",
+      "image": "brand/img-01.jpg",
+      "frame": "none",
+      "say": "macOS、Windows 和手机上都能用。给它一个提示，它就开始工作。"
+    },
+    {
+      "type": "feature",
+      "side": "right",
+      "kicker": "组建团队",
+      "title": "拉几个 Agent\n**一起干活**",
+      "sub": "一个调研，一个筛选，一个起草，\n方向和决定由你来定",
+      "image": "brand/img-02.jpg",
+      "frame": "none",
+      "say": "把几个 Agent 拉进同一个群聊，一个调研，一个筛选，一个起草，最终由你拍板。"
+    },
+    {
+      "type": "tags",
+      "mode": "cloud",
+      "title": "这些事，**都能 Cue**",
+      "items": [
+        "订机票酒店",
+        "找周末餐厅",
+        "预约体检",
+        "安排保洁",
+        "比较维修报价",
+        "预订露营地",
+        "订电影票",
+        "接诊所回电",
+        "找儿科医生",
+        "预约流感疫苗",
+        "规划北海道旅行",
+        "找人上门安装"
+      ],
+      "say": "订行程、预约看病、安排家务、比较维修报价，日常琐事都能交给它。"
+    },
+    {
+      "type": "feature",
+      "kicker": "日常服务",
+      "title": "扫个码\n**点餐排队**",
+      "sub": "在餐厅扫描二维码，\nAgent 替你点餐或排队",
+      "image": "brand/img-03.jpg",
+      "frame": "none",
+      "say": "在餐厅扫一下二维码，你的 Agent 就能替你点餐或排队。"
+    },
+    {
+      "type": "end",
+      "title": "你的专属 Agent\n随时 **Cue**",
+      "sub": "抢先体验中",
+      "cta": "cue.im",
+      "say": "Cue，现已开放抢先体验。"
+    }
+  ]
+}

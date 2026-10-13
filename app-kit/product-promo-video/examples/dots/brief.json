@@ -1,0 +1,92 @@
+{
+  "name": "dots",
+  "product": {
+    "name": "dots",
+    "slogan": "全天候为你工作的智能体",
+    "url": "https://openai.com/dots/",
+    "logo": "brand/logo-dots.png",
+    "colors": {
+      "accent": "#6E8BFF",
+      "accent2": "#FF5FA2"
+    }
+  },
+  "style": "apple-keynote",
+  "format": "16:9",
+  "captions": true,
+  "voice": {
+    "engine": "auto"
+  },
+  "bgm": "auto",
+  "css": ".t-logo .logo { width: 760px; } .t-end .logo { width: 460px; }",
+  "scenes": [
+    {
+      "type": "logo",
+      "tagline": "OpenAI · 全天候为你工作的智能体",
+      "say": "dots，来自 OpenAI，全天候为你工作的智能体。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "DEVDAY 2026",
+      "title": "了解你**看重的事**\n持续推进",
+      "sub": "分担重要任务，让你腾出更多时间与精力",
+      "say": "它了解你看重的事，持续为你推进工作，让你腾出更多时间和精力。"
+    },
+    {
+      "type": "feature",
+      "kicker": "自己的云电脑",
+      "title": "可以**独立**\n完成工作",
+      "sub": "用自己的云电脑、浏览器\n和已连接的应用",
+      "image": "brand/img-03.jpg",
+      "frame": "none",
+      "say": "每个 dot 都有自己的云电脑，用浏览器和已连接的应用，独立完成工作。"
+    },
+    {
+      "type": "stats",
+      "kicker": "来自 OpenAI 官方介绍",
+      "title": "接入 **4000+** 款应用",
+      "items": [
+        {
+          "value": "4000+",
+          "label": "可连接的应用"
+        },
+        {
+          "value": "24/7",
+          "label": "全天候运行"
+        },
+        {
+          "value": "3个",
+          "label": "ChatGPT · Slack · Teams"
+        }
+      ],
+      "say": "通过插件生态，dot 能接入四千多款应用，在 ChatGPT、Slack 和 Teams 里随时找到它。"
+    },
+    {
+      "type": "feature",
+      "side": "right",
+      "kicker": "从反馈中学习",
+      "title": "合作越多\n**越懂你**",
+      "sub": "记得你的偏好、思考方式\n和你想要的结果",
+      "image": "brand/img-07.jpg",
+      "frame": "none",
+      "say": "合作越多，它越了解你的偏好、思考方式，以及你想要的结果。"
+    },
+    {
+      "type": "gallery",
+      "title": "先从**一个 dot** 开始",
+      "images": [
+        "brand/img-02.jpg",
+        "brand/img-04.jpg",
+        "brand/img-05.jpg",
+        "brand/img-06.jpg"
+      ],
+      "say": "先从你的第一个 dot 开始，给它取个名字，打造属于你的助手。"
+    },
+    {
+      "type": "end",
+      "title": "全天候为你工作",
+      "sub": "已在 ChatGPT 中向 Pro 与 Business Premium 用户推出",
+      "cta": "openai.com/dots",
+      "say": "dots，现已在 ChatGPT 中推出。"
+    }
+  ]
+}

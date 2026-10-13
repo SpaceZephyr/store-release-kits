@@ -1,0 +1,109 @@
+{
+  "name": "grok-bot",
+  "product": {
+    "name": "Grok Bot",
+    "slogan": "能交付真活儿的 AI 队友",
+    "url": "https://x.ai/bot",
+    "logo": "brand/logo-grokbot.png",
+    "colors": {
+      "accent": "#2F6BFF",
+      "accent2": "#111111"
+    }
+  },
+  "style": "editorial",
+  "format": "16:9",
+  "captions": true,
+  "voice": {
+    "engine": "auto"
+  },
+  "bgm": "auto",
+  "css": ".logo img { filter: brightness(0); } .t-logo .logo { width: 760px; } .t-end .logo { width: 520px; }",
+  "scenes": [
+    {
+      "type": "logo",
+      "tagline": "能交付真活儿的 AI 队友",
+      "say": "Grok Bot，能交付真活儿的 AI 队友。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "AUG 11, 2026 · BETA",
+      "title": "一支**全天候**在线的\n智能体团队",
+      "sub": "它们有自己的电脑，像你一样使用工具和应用",
+      "say": "Grok Bot 是一支全天候在线的智能体团队。它们有自己的电脑，像你一样登录工具、操作应用。"
+    },
+    {
+      "type": "feature",
+      "kicker": "MEET GROK BOT",
+      "title": "像同事一样\n**发消息**",
+      "sub": "交代任务，它把整件事做完，\n只在需要你批准时回来找你",
+      "image": "brand/ui-app.jpg",
+      "frame": "none",
+      "say": "像给同事发消息一样交代任务。它把整件事做完，只在需要你批准的时候回来找你。"
+    },
+    {
+      "type": "cards",
+      "title": "一个**团队**，各管一摊",
+      "items": [
+        {
+          "icon": "crown",
+          "label": "Chief",
+          "desc": "统筹其他 Bot"
+        },
+        {
+          "icon": "megaphone",
+          "label": "Sales Outbound",
+          "desc": "研究客户、起草外联"
+        },
+        {
+          "icon": "inbox",
+          "label": "Inbox Manager",
+          "desc": "收件箱清零"
+        },
+        {
+          "icon": "user-search",
+          "label": "Talent Scout",
+          "desc": "招聘与引荐"
+        },
+        {
+          "icon": "receipt",
+          "label": "Expense Manager",
+          "desc": "整理报销"
+        },
+        {
+          "icon": "bug",
+          "label": "Engineering",
+          "desc": "复现问题、提交修复"
+        }
+      ],
+      "say": "一个 Bot 当总管，其余各管一摊：外联、收件箱、招聘、报销、修 bug，彼此之间自己协作。"
+    },
+    {
+      "type": "feature",
+      "side": "right",
+      "kicker": "SHOW A BOT HOW IT'S DONE",
+      "title": "演示一次\n**以后它来做**",
+      "sub": "它跟着你做一遍，存成流程，\n下次自己完成",
+      "image": "brand/ui-teach.jpg",
+      "frame": "none",
+      "say": "把流程演示一遍，它会记下来，下次自己完成。"
+    },
+    {
+      "type": "gallery",
+      "title": "你离开电脑\n它**继续工作**",
+      "images": [
+        "brand/img-01.jpg",
+        "brand/img-02.jpg",
+        "brand/img-03.jpg",
+        "brand/img-04.jpg"
+      ],
+      "say": "你离开电脑，它在云端继续工作。"
+    },
+    {
+      "type": "end",
+      "title": "能交付真活儿的 AI 队友",
+      "sub": "测试版，支持桌面端与 iOS",
+      "cta": "x.ai/bot",
+      "say": "Grok Bot，现已开放测试。"
+    }
+  ]
+}

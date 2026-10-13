@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品宣传视频"
+  short_description: "从官网或产品资料生成带动效、配音、字幕和配乐的产品宣传片，8 种动效风格可切换"
+  default_prompt: "使用 $product-promo-video 给这个产品做一条 40 秒的宣传视频。"

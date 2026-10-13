@@ -5,7 +5,7 @@
 <p align="center"><em>「代码写完以后，把上架这件事也认真做完。」</em></p>
 
 <p align="center">
-  <img alt="skills" src="https://img.shields.io/badge/Skills-4-111111">
+  <img alt="skills" src="https://img.shields.io/badge/Skills-5-111111">
   <img alt="platforms" src="https://img.shields.io/badge/Platforms-Chrome%20%7C%20WeChat%20%7C%20App%20Store-0A84FF">
   <img alt="output" src="https://img.shields.io/badge/Output-Release%20Kit-5856D6">
   <img alt="runtime" src="https://img.shields.io/badge/Runtime-Python%203-34C759">
@@ -15,7 +15,7 @@
   License：未声明 · Codex Skills · <a href="https://github.com/SpaceZephyr/store-release-kits/issues">Issues</a>
 </p>
 
-前三个负责「把材料准备齐」，第四个负责「把截图变成能上架的宣传图」。
+前三个负责「把材料准备齐」，第四个负责「把截图变成能上架的宣传图」，第五个负责「把产品做成带配音的宣传视频」。
 
 Store Release Kits 是一组面向应用上架的 Codex Skills。给它一个真实仓库，它会先读代码和配置，再准备图标、截图、商店文案、隐私政策、审核说明与发布检查包。
 
@@ -29,6 +29,7 @@ Store Release Kits 是一组面向应用上架的 Codex Skills。给它一个真
 | [`wechat-miniprogram-store-kit`](wechat-miniprogram-store-kit/) | 微信小程序 | 小程序图标、功能截图、审核资料、隐私保护指引矩阵、域名与资质检查、发布物料包 |
 | [`app-store-release-kit`](app-store-release-kit/) | Apple App Store | App 图标、多设备截图、App Store 元数据、App Privacy、Review Notes、TestFlight 与发布检查 |
 | [`store-promo-shots`](store-promo-shots/) | 以上三个平台 + 网页 | 把真实截图批量合成成宣传图：八种版式、六套主题、一次出全套尺寸 |
+| [`product-promo-video`](product-promo-video/) | 官网、发布会、短视频平台 | 从官网抓 logo / slogan / 主色 / 界面图，生成带动效、配音、字幕、配乐的宣传片：八种动效风格，横竖版一键切换。附 5 个产品案例 |
 
 ## 安装
 
@@ -56,6 +57,10 @@ npx skills add SpaceZephyr/store-release-kits
 使用 $app-store-release-kit，为这个 iOS App 准备 App Store Connect 元数据、截图和隐私材料。
 ```
 
+```text
+使用 $product-promo-video，根据 https://example.com 给这个产品做一条 40 秒的宣传视频，出两种风格。
+```
+
 每个 Skill 都带有自己的：
 
 - `SKILL.md`：完整工作流和完成标准
@@ -67,14 +72,17 @@ npx skills add SpaceZephyr/store-release-kits
 ## 仓库结构
 
 ```text
-store-release-kits/
+app-kit/
 ├── chrome-extension-store-kit/
 ├── wechat-miniprogram-store-kit/
 ├── app-store-release-kit/
+├── store-promo-shots/
+├── product-promo-video/
+│   └── examples/        # 哔哩哔哩、Muse、Grok Bot、dots、Cue 五个案例
 └── README.md
 ```
 
-三个目录彼此独立，可以单独安装、修改和调用。
+每个目录彼此独立，可以单独安装、修改和调用。
 
 ## 边界
 

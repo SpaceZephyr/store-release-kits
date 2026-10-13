@@ -1,0 +1,99 @@
+{
+  "name": "muse",
+  "product": {
+    "name": "Muse",
+    "slogan": "替你把事办成的 AI 智能体",
+    "url": "https://muse.ai/",
+    "logo": "brand/logo-1-raw.svg",
+    "logoMono": false,
+    "colors": {
+      "accent": "#0064D4",
+      "accent2": "#1d1d1f"
+    }
+  },
+  "style": "bento",
+  "format": "16:9",
+  "captions": true,
+  "voice": {
+    "engine": "auto"
+  },
+  "bgm": "auto",
+  "css": ".t-logo .logo, .t-end .logo { width: 260px; }",
+  "scenes": [
+    {
+      "type": "logo",
+      "tagline": "Muse · 你的个人 AI 智能体",
+      "say": "Muse，替你把事办成的 AI 智能体。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "META · 2026",
+      "title": "给它一个**目标**\n剩下的交给它",
+      "sub": "从省钱、健康，到购物和人际关系",
+      "say": "给 Muse 一个目标，或者一件日常小事，剩下的它来处理。"
+    },
+    {
+      "type": "cards",
+      "title": "围绕你的**整个生活**",
+      "items": [
+        {
+          "icon": "piggy-bank",
+          "label": "省钱"
+        },
+        {
+          "icon": "heart-pulse",
+          "label": "改善健康"
+        },
+        {
+          "icon": "shopping-bag",
+          "label": "聪明购物"
+        },
+        {
+          "icon": "users",
+          "label": "维系关系"
+        }
+      ],
+      "say": "省钱、健康、购物、维系关系，Muse 围绕你的整个生活来帮忙。"
+    },
+    {
+      "type": "feature",
+      "kicker": "Muse Secure VM",
+      "title": "一台属于你的\n**云端电脑**",
+      "sub": "持久、隔离的 Linux 环境，带完整浏览器，\n你随时可以接手",
+      "image": "brand/og-image.jpg",
+      "frame": "none",
+      "say": "每位用户都有一台云端电脑，Muse 在里面用浏览器替你干活，你随时可以接手。"
+    },
+    {
+      "type": "tags",
+      "mode": "cloud",
+      "title": "像**发消息**一样交代",
+      "items": [
+        "手机",
+        "Mac",
+        "WhatsApp",
+        "邮件",
+        "日历",
+        "Instagram",
+        "目标追踪",
+        "主动提建议",
+        "自己造工具",
+        "操作记录"
+      ],
+      "say": "在手机、Mac，或者直接在 WhatsApp 里，像给朋友发消息一样告诉它。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "安全与掌控",
+      "title": "发邮件、付款前\n**先问你**",
+      "sub": "每一步都有记录；结账时生成一次性卡号，\n真实卡号不会暴露给商家",
+      "say": "发邮件、付款这类操作，都会先征得你的同意。结账时使用一次性卡号，真实卡号不会暴露。"
+    },
+    {
+      "type": "end",
+      "title": "Muse\n替你把事**办成**",
+      "cta": "muse.ai",
+      "say": "Muse，现已在美国上线。"
+    }
+  ]
+}
