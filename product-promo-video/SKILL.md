@@ -1,6 +1,6 @@
 ---
 name: product-promo-video
-description: "产品宣传视频制作：把产品资料（用户提供，或从官网自动抓取 logo、slogan、主色、截图）做成带动效、带配音、带字幕和配乐的宣传片 MP4。内置 8 种产品界常见的动效风格（发布会极简、科技光晕、快节奏大字、扁平 MG、杂志编辑、新粗野、赛博故障、便当格），同一份脚本可以一键换风格、换横竖版。当用户说「做个产品宣传视频」「产品宣传片」「产品介绍视频」「promo video」「launch video」「给 XX 官网做个视频」「换个风格再出一版」时触发。"
+description: "产品宣传视频制作：把产品资料（用户提供，或从官网自动抓取 logo、slogan、主色、截图）做成带动效、带配音、带字幕和配乐的宣传片 MP4。配音用本地开源 TTS（yovoice + Qwen3-TTS），动效带镜头运动、旁白对位、截图放大镜。内置 8 种产品界常见的动效风格（发布会极简、科技光晕、快节奏大字、扁平 MG、杂志编辑、新粗野、赛博故障、便当格），同一份脚本可以一键换风格、换横竖版。当用户说「做个产品宣传视频」「产品宣传片」「产品介绍视频」「promo video」「launch video」「给 XX 官网做个视频」「换个风格再出一版」时触发。"
 ---
 
 # Product Promo Video
@@ -9,6 +9,10 @@ description: "产品宣传视频制作：把产品资料（用户提供，或从
 
 画面全部是 HTML/CSS，由一个按时间推进的运行时驱动，无头 Chrome 逐帧截图，所以文字清晰、
 每一帧都能复现，换风格、换品牌色、换横竖版都不用重做素材。
+
+画面不是一页页翻的 PPT：每场有自己的镜头（推、拉、横移、快推、慢漂，相邻两场动作不同），
+元素在旁白念到时才落下（念到「电话」电话那张卡落下，念到数字数字砸下来），
+截图会被推近并弹出放大镜标出重点，转场在每种风格的一组转场里轮换。
 
 和 [store-release-kits](https://github.com/SpaceZephyr/store-release-kits) 的关系：
 `store-promo-shots` 做商店静态宣传图，这个 Skill 做动态宣传片，两者用的截图可以通用。
@@ -23,6 +27,7 @@ description: "产品宣传视频制作：把产品资料（用户提供，或从
    [Lucide](https://lucide.dev/icons) 线性图标，按名字引用（`"icon": "gamepad-2"`），颜色自动跟随风格。
    `make.py` 渲染前会扫描整份 brief，发现 emoji 直接报错并列出位置。颜文字（如 `(゜-゜)つロ`）和箭头不算 emoji。
 5. 做别人家的产品（比如拿 B 站当示例）只能用于演示和内部提案，不要冒充官方发布。
+6. **配音要校验。** 出片前跑 `check_voice.py` 把配音识别回文字，英文产品名念错、吞字的场要修（见「配音和配乐」）。
 
 ## 流程
 
@@ -118,6 +123,12 @@ ffmpeg -y -loglevel error -pattern_type glob -i "out/<style>-16x9/stills/s*.jpg"
 检查清单：文字有没有溢出或折行难看、标题有没有压到卡片或数字、字幕有没有挡住内容、
 截图里有没有登录弹窗、logo 颜色在这个底色上看不看得清。改完再出成片。
 
+`--preview` 已经生成了配音，顺手校验（Apple Silicon，环境见 references/voice.md）：
+
+```bash
+~/.cache/promo-tts/.venv/bin/python scripts/check_voice.py out/<style>-16x9   # 每场 CER，> 0.2 的去听
+```
+
 成片出来后再抽几帧看动效：入场时刻、转场中间各抽一帧（`ffmpeg -ss <秒> -i x.mp4 -frames:v 1`）。
 场景起止时间在 `out/<style>/timeline.json` 里。
 
@@ -128,26 +139,48 @@ ffmpeg -y -loglevel error -pattern_type glob -i "out/<style>-16x9/stills/s*.jpg"
 - `index.html`：浏览器直接打开就是实时预览，`?t=12.5` 停在某一秒
 - `stills/`、`timeline.json`、`voice/`、`bgm.wav`
 
-告诉用户：用了哪个配音引擎、配乐是合成的临时曲（正式投放建议换授权音乐）、数据出处。
+告诉用户：用了哪个配音引擎和音色、配音校验结果、配乐是合成的临时曲（正式投放建议换授权音乐）、数据出处。
 
 ## 配音和配乐
 
-- 配音引擎按顺序尝试：`edge-tts`（微软在线音色，最自然）→ macOS `say`（婷婷，机械感较重）。
-  `voice.engine` 可指定 `edge` / `say` / `kokoro` / `none`；每场也可以用 `voiceFile` 换成真人录音。
-  edge-tts 偶尔会被微软接口拒绝（403），这时会自动退回 say，**交付时要说明用的是哪个**。
-- 每种风格有默认音色和语速（见 `make.py` 的 `STYLE_META`），可用 `voice.voice` / `voice.rate` 覆盖。
-- 配乐 `"bgm": "auto"` 会按风格合成一段无版权的临时曲（`scripts/bgm.py`，五种情绪）。
-  正式片写 `"bgm": "music/xxx.mp3"` 用授权音乐。旁白响起时配乐会自动压低。
+配音引擎按顺序尝试：**yovoice**（本地开源 TTS，默认用 Qwen3-TTS 1.7B CustomVoice，Apache-2.0）→ edge-tts → macOS `say`。
+安装、选音色、读音标注、校验见 [references/voice.md](references/voice.md)，要点：
+
+- 每种风格有默认音色和演绎描述（`make.py` 的 `YV_META`）。brief 里 `voice.speaker` / `voice.description` / `voice.seed` 可覆盖，
+  某一场念得不好可以单独写 `"seed": 11` 换一版。
+- 中文模型读英文产品名经常读错（Grok Bot 读成 Rockball）。旁白里写 `{字幕写法|配音读法}`：`{Grok Bot|格罗克波特}`、`{Cue|Q}`，
+  字幕显示前者，配音念后者。
+- 模型在顿号、逗号处停顿偏长，`make.py` 会把超过 0.18 秒的停顿压短。
+- **出片前校验**：`check_voice.py out/<style>-16x9` 用 Whisper 把每场配音识别回来和原文比，CER > 0.2 的场去听、改读音或换种子。
+- 交付时说明用了哪个引擎和音色。没装 yovoice 时会退回 edge-tts / say，say 的机械感很重，要告诉用户。
+- 每场也可以用 `voiceFile` 换成真人录音。
+
+配乐 `"bgm": "auto"` 会按风格合成一段无版权的临时曲（`scripts/bgm.py`，五种情绪）。
+正式片写 `"bgm": "music/xxx.mp3"` 用授权音乐。旁白响起时配乐会自动压低。
+
+## 动效怎么组织
+
+参考了 [huashu-art-motion](https://github.com/alchaincyf/huashu-art-motion) 的导演规则：镜头是标点，重音才用快的；
+相邻镜头动作不同、推进去要拉出来；不要固定页眉页码、要点逐条淡入、每场同一个动作这类「翻页 PPT」做法。
+
+| 机制 | 做法 | 在 brief 里怎么控制 |
+| --- | --- | --- |
+| 镜头 | 每场一份镜头表：开场从偏位、放大或倾斜处落定，之后慢漂；功能场念到重点时推过去，收尾拉回；数字砸下时快推一下 | 默认按场景类型和序号自动安排 |
+| 旁白对位 | 卡片、数字、要点在旁白念到对应的词时落下（按字数估算时间） | 卡片 `label`、数字 `label` 要在 `say` 里原样出现才能对上 |
+| 放大镜 | 截图里 focus 那块被放大弹出，其余压暗，镜头同时推过去 | `"focus": [x, y, 放大倍数]`、`"focusAt": "旁白里的词"`、`"callout": "一句标注"` |
+| 功能场版式 | `split` 左右分；`hero` 标题在上、大截图从下方立起来；竖版是 `stack` | `"layout"`，不写时奇偶场交替 |
+| 转场 | 每种风格一组转场轮换（如 neo-brutal：色带 → 竖条 → 甩镜） | 单场 `"transition"` 覆盖 |
+| 常驻动态 | 背景描边大字横移、背景视差、logo 扫光、冲击波环、卡片图标笔画画出来、被念到的卡片抬起 | 风格里 `ghost: false` 关掉大字 |
 
 ## 改造和扩展
 
-- 单场改转场：场景里写 `"transition": "circle"`（可选 cut fade blur push pushUp zoom circle shapeWipe flash glitchCut stripes）
+- 单场改转场：场景里写 `"transition": "circle"`（可选 cut fade blur blurPush zoomThrough whip whipUp push pushUp zoom circle bars shapeWipe spin flash glitchCut stripes）
 - 单场换底色主题：在 brief 的 `css` 字段里写额外 CSS
 - 品牌字体：`"fontFile": "fonts/xxx.ttf"`
 - 改颜色：`product.colors.accent / accent2`，或 `tokens` 覆盖任意变量（bg、fg、sub、card…）
 - 新增风格：`templates/styles.js` 加一项（tokens + 文字/图片/卡片入场 + 转场 + 背景），
   `templates/styles.css` 加皮肤，`make.py` 的 `STYLE_META` 加配乐和音色，`references/styles.md` 写说明
-- 新增动效预设：`templates/runtime.js` 的 `TEXT` / `IMAGE` / `TRANS`
+- 新增动效预设：`templates/runtime.js` 的 `TEXT` / `IMAGE` / `TRANS`；镜头用 `camInit` / `camMove` / `drift`，旁白对位用 `beat(d, "词", 兜底秒数)`
 
 ## 案例
 
@@ -164,7 +197,8 @@ ffmpeg -y -loglevel error -pattern_type glob -i "out/<style>-16x9/stills/s*.jpg"
 ## 依赖
 
 Node 18+、ffmpeg、Chrome（或 puppeteer 缓存的 chrome-headless-shell）、Python 3 + numpy（合成配乐用）。
-可选：`uvx`（edge-tts）。不调用任何图像生成 API。
+配音：[yovoice](https://github.com/leemysw/yovoice) CLI + `qwen3-tts-customvoice-q8` 模型（2.8 GB）。校验：mlx-audio + whisper-large-v3-turbo（Apple Silicon）。
+可选：`uvx`（edge-tts）。不调用任何图像生成 API，配音和校验都在本机跑。
 
 ## 边界
 

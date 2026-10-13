@@ -14,7 +14,8 @@
   "format": "16:9",
   "captions": true,
   "voice": {
-    "engine": "auto"
+    "engine": "auto",
+    "rate": "+30%"
   },
   "bgm": "auto",
   "css": ".t-logo .logo { width: 760px; } .t-end .logo { width: 460px; }",
@@ -22,7 +23,7 @@
     {
       "type": "logo",
       "tagline": "OpenAI · 全天候为你工作的智能体",
-      "say": "dots，来自 OpenAI，全天候为你工作的智能体。"
+      "say": "{dots|达茨}，来自 OpenAI，全天候为你工作的智能体。"
     },
     {
       "type": "slogan",
@@ -36,7 +37,7 @@
       "kicker": "自己的云电脑",
       "title": "可以**独立**\n完成工作",
       "sub": "用自己的云电脑、浏览器\n和已连接的应用",
-      "image": "brand/img-03.jpg",
+      "image": "brand/img-03.webp",
       "frame": "none",
       "say": "每个 dot 都有自己的云电脑，用浏览器和已连接的应用，独立完成工作。"
     },
@@ -66,7 +67,7 @@
       "kicker": "从反馈中学习",
       "title": "合作越多\n**越懂你**",
       "sub": "记得你的偏好、思考方式\n和你想要的结果",
-      "image": "brand/img-07.jpg",
+      "image": "brand/img-07.webp",
       "frame": "none",
       "say": "合作越多，它越了解你的偏好、思考方式，以及你想要的结果。"
     },
@@ -74,10 +75,10 @@
       "type": "gallery",
       "title": "先从**一个 dot** 开始",
       "images": [
-        "brand/img-02.jpg",
-        "brand/img-04.jpg",
-        "brand/img-05.jpg",
-        "brand/img-06.jpg"
+        "brand/img-02.webp",
+        "brand/img-04.webp",
+        "brand/img-05.webp",
+        "brand/img-06.webp"
       ],
       "say": "先从你的第一个 dot 开始，给它取个名字，打造属于你的助手。"
     },
@@ -86,7 +87,7 @@
       "title": "全天候为你工作",
       "sub": "已在 ChatGPT 中向 Pro 与 Business Premium 用户推出",
       "cta": "openai.com/dots",
-      "say": "dots，现已在 ChatGPT 中推出。"
+      "say": "{dots|达茨}，现已在 ChatGPT 中推出。"
     }
   ]
 }

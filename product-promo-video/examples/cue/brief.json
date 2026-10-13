@@ -22,14 +22,14 @@
     {
       "type": "logo",
       "tagline": "你的专属 Agent，随时 Cue。",
-      "say": "Cue。你的专属 Agent，随时 Cue。"
+      "say": "{Cue|Q}。你的专属 Agent，随时 {Cue|Q}。"
     },
     {
       "type": "slogan",
       "kicker": "BY MANUS",
       "title": "生活里的事\n**交给 Cue**",
       "sub": "无论生活带来什么，Cue 都在这里帮你处理",
-      "say": "无论生活里遇到什么事，Cue 都能帮你处理。"
+      "say": "无论生活里遇到什么事，{Cue|Q} 都能帮你处理。"
     },
     {
       "type": "cards",
@@ -63,9 +63,16 @@
       "kicker": "多端可用",
       "title": "手机和电脑\n**都能用**",
       "sub": "macOS、Windows 和手机，\n给它一个提示，它就开始工作",
-      "image": "brand/img-01.jpg",
+      "image": "brand/img-01.webp",
       "frame": "none",
-      "say": "macOS、Windows 和手机上都能用。给它一个提示，它就开始工作。"
+      "say": "macOS、Windows 和手机上都能用。给它一个提示，它就开始工作。",
+      "focus": [
+        0.62,
+        0.47,
+        1.9
+      ],
+      "focusAt": "提示",
+      "callout": "一句话，出两版设计"
     },
     {
       "type": "feature",
@@ -73,9 +80,16 @@
       "kicker": "组建团队",
       "title": "拉几个 Agent\n**一起干活**",
       "sub": "一个调研，一个筛选，一个起草，\n方向和决定由你来定",
-      "image": "brand/img-02.jpg",
+      "image": "brand/img-02.webp",
       "frame": "none",
-      "say": "把几个 Agent 拉进同一个群聊，一个调研，一个筛选，一个起草，最终由你拍板。"
+      "say": "把几个 Agent 拉进同一个群聊，一个调研，一个筛选，一个起草，最终由你拍板。",
+      "focus": [
+        0.45,
+        0.42,
+        1.9
+      ],
+      "focusAt": "一个调研",
+      "callout": "三个 Agent 分工"
     },
     {
       "type": "tags",
@@ -102,16 +116,23 @@
       "kicker": "日常服务",
       "title": "扫个码\n**点餐排队**",
       "sub": "在餐厅扫描二维码，\nAgent 替你点餐或排队",
-      "image": "brand/img-03.jpg",
+      "image": "brand/img-03.webp",
       "frame": "none",
-      "say": "在餐厅扫一下二维码，你的 Agent 就能替你点餐或排队。"
+      "say": "在餐厅扫一下二维码，你的 Agent 就能替你点餐或排队。",
+      "focus": [
+        0.64,
+        0.56,
+        1.8
+      ],
+      "focusAt": "点餐",
+      "callout": "替你点一份披萨"
     },
     {
       "type": "end",
       "title": "你的专属 Agent\n随时 **Cue**",
       "sub": "抢先体验中",
       "cta": "cue.im",
-      "say": "Cue，现已开放抢先体验。"
+      "say": "{Cue|Q}，现已开放抢先体验。"
     }
   ]
 }

@@ -15,7 +15,8 @@
   "format": "16:9",
   "captions": true,
   "voice": {
-    "engine": "auto"
+    "engine": "auto",
+    "seed": 7
   },
   "bgm": "auto",
   "css": ".t-logo .logo, .t-end .logo { width: 260px; }",
@@ -30,7 +31,8 @@
       "kicker": "META · 2026",
       "title": "给它一个**目标**\n剩下的交给它",
       "sub": "从省钱、健康，到购物和人际关系",
-      "say": "给 Muse 一个目标，或者一件日常小事，剩下的它来处理。"
+      "say": "给 Muse 一个目标，或者一件日常小事，剩下的它来处理。",
+      "seed": 11
     },
     {
       "type": "cards",
@@ -62,7 +64,8 @@
       "sub": "持久、隔离的 Linux 环境，带完整浏览器，\n你随时可以接手",
       "image": "brand/og-image.jpg",
       "frame": "none",
-      "say": "每位用户都有一台云端电脑，Muse 在里面用浏览器替你干活，你随时可以接手。"
+      "say": "每位用户都有一台云端电脑，Muse 在里面用浏览器替你干活，你随时可以接手。",
+      "layout": "hero"
     },
     {
       "type": "tags",
@@ -83,10 +86,26 @@
       "say": "在手机、Mac，或者直接在 WhatsApp 里，像给朋友发消息一样告诉它。"
     },
     {
-      "type": "slogan",
+      "type": "cards",
       "kicker": "安全与掌控",
-      "title": "发邮件、付款前\n**先问你**",
-      "sub": "每一步都有记录；结账时生成一次性卡号，\n真实卡号不会暴露给商家",
+      "title": "关键操作，**先问你**",
+      "items": [
+        {
+          "icon": "mail-check",
+          "label": "发邮件",
+          "desc": "发出去之前先给你看"
+        },
+        {
+          "icon": "credit-card",
+          "label": "付款",
+          "desc": "付钱之前征得你同意"
+        },
+        {
+          "icon": "shield-check",
+          "label": "一次性卡号",
+          "desc": "真实卡号不暴露给商家"
+        }
+      ],
       "say": "发邮件、付款这类操作，都会先征得你的同意。结账时使用一次性卡号，真实卡号不会暴露。"
     },
     {

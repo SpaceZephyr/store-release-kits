@@ -20,11 +20,11 @@ python3 ../../scripts/make.py brief.json --style kinetic  # 同一份脚本换�
 
 | 案例 | 风格 | 时长 | 素材来源 |
 | --- | --- | --- | --- |
-| [哔哩哔哩](bilibili/) | `flat-mg` `kinetic` `saas-glow` `cyber-glitch`，另有 `kinetic` 竖版 | 41–47s | bilibili.com 首页与手机版、app.bilibili.com 矢量 logo、2026 年二季度财报 |
-| [Meta Muse](muse/) | `bento` | 40s | muse.ai |
-| [Grok Bot](grok-bot/) | `editorial` | 44s | x.ai/bot、x.ai/news/introducing-grok-bot |
-| [OpenAI dots](dots/) | `apple-keynote` | 45s | openai.com/dots |
-| [Manus Cue](cue/) | `neo-brutal` | 39s | cue.im、manus.im/blog/introducing-manus-2-0 |
+| [哔哩哔哩](bilibili/) | `flat-mg` `kinetic` `saas-glow` `cyber-glitch`，另有 `kinetic` 竖版 | 41–56s | bilibili.com 首页与手机版、app.bilibili.com 矢量 logo、2026 年二季度财报 |
+| [Meta Muse](muse/) | `bento` | 43s | muse.ai |
+| [Grok Bot](grok-bot/) | `editorial` | 47s | x.ai/bot、x.ai/news/introducing-grok-bot |
+| [OpenAI dots](dots/) | `apple-keynote` | 51s | openai.com/dots |
+| [Manus Cue](cue/) | `neo-brutal` | 46s | cue.im、manus.im/blog/introducing-manus-2-0 |
 
 ## 预览
 
@@ -61,8 +61,23 @@ logo 只出现在 og 图里，用 `extract_logo.py --mode white` 抠出来，再
 **Cue**：`manus.im/cue` 是 404，从 Manus 2.0 发布文章的链接里找到独立官网 cue.im，中文 slogan「你的专属 Agent，随时 Cue。」和电话、邮箱、钱包、电脑四项身份能力都来自那里。
 吉祥物是蓝、黄、红三色，配色大胆，所以用 neo-brutal。
 
+## 第二版改了什么
+
+第一版的反馈是「配音像机器人」「动效太像 PPT」，第二版九条全部重做：
+
+- **配音**：从 macOS 婷婷换成本机 Qwen3-TTS，压短了模型在顿号处的长停顿，逐场用 Whisper 校验。
+  校验抓到的问题都改了：Grok Bot 被读成 Rockball，Cue、dots、哔哩哔哩在句首被吞掉或念得很轻。
+- **镜头**：每场开场从偏位、放大或倾斜处落定，之后慢漂；数字砸下时快推一下；相邻两场的镜头动作不同。
+- **放大镜**：Cue 的三张界面图、Grok Bot 的两张，在旁白念到对应内容时镜头推过去，重点区域放大弹出并加一句标注
+  （「三个 Agent 分工」「52 个客户 · 36 份草稿」「Teach a task」，都是截图里真实存在的内容）。
+- **旁白对位**：Cue 的电话、邮箱、钱包、电脑四张卡，在念到这几个词时依次落下并抬起。
+- **Muse**：原来「发邮件、付款前先问你」是一句居中字停 8 秒，改成三张卡（发邮件、付款、一次性卡号）随旁白落下；云端电脑那场改用大图版式。
+- **其他**：转场按风格轮换，去掉了 editorial 的页框和页码；修了含矩形的 Lucide 图标（钱包、电脑、信用卡）缺一块的 bug。
+
 ## 说明
 
 - 这些案例用来演示 Skill 的能力，**不是各公司的官方宣传片**。logo、界面截图和产品名称的权利归各自公司所有。
-- 配音用的是 macOS 婷婷（制作时 edge-tts 接口返回 403），配乐是 `bgm.py` 合成的临时曲。正式使用请换真人录音和授权音乐。
+- 配音是本机跑的 Qwen3-TTS（yovoice）：Cue 用 Vivian，Grok Bot 和 B 站 kinetic / cyber-glitch 用 Dylan，Muse 和 B 站 saas-glow 用 Serena，dots 用 Uncle_Fu，B 站 flat-mg 用 Vivian。
+  每条都用 `check_voice.py` 校验过；英文名的读音标注写在 brief 的 `say` 里（`{Grok Bot|格罗克波特}`、`{Cue|Q}`、`{dots|达茨}`）。
+- 配乐是 `bgm.py` 合成的临时曲，正式投放请换授权音乐。
 - 产品信息以 2026 年 10 月官网内容为准，之后可能变化。
