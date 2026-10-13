@@ -5,6 +5,7 @@
 - `brief.json`：完整脚本（场景、屏幕文案、旁白、风格、品牌色）
 - `brand/`：从官网抓下来、实际用到的素材（logo、界面图、场景图）
 - `preview.jpg`：每一场的静帧总览
+- `*.gif`：每一场开头 2.5 秒拼成的动图（5MB 以内，无声）
 
 成片视频在 [Releases · product-promo-video-examples](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)。
 
