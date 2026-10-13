@@ -1,0 +1,150 @@
+{
+  "name": "bilibili",
+  "product": {
+    "name": "哔哩哔哩",
+    "slogan": "你感兴趣的视频都在B站",
+    "url": "https://www.bilibili.com/",
+    "logo": "brand/logo-vector.svg",
+    "logoMono": true,
+    "colors": {
+      "accent": "#FB7299",
+      "accent2": "#00AEEC"
+    }
+  },
+  "style": "flat-mg",
+  "format": "16:9",
+  "captions": true,
+  "voice": {
+    "engine": "auto"
+  },
+  "bgm": "auto",
+  "scenes": [
+    {
+      "type": "logo",
+      "tagline": "你感兴趣的视频都在B站",
+      "say": "哔哩哔哩。你感兴趣的视频，都在B站。"
+    },
+    {
+      "type": "slogan",
+      "kicker": "BILIBILI",
+      "title": "一个**会说话**的\n视频社区",
+      "sub": "看视频的时候，满屏弹幕陪你一起看",
+      "say": "在这里看视频，从来不是一个人。弹幕从屏幕上飘过，大家一起笑，一起哭。"
+    },
+    {
+      "type": "tags",
+      "mode": "danmaku",
+      "title": "**弹幕**，\n是B站的语言",
+      "items": [
+        "前方高能！",
+        "awsl",
+        "泪目了",
+        "名场面打卡",
+        "这就是青春啊",
+        "下次一定",
+        "干杯~ (゜-゜)つロ",
+        "UP主辛苦了",
+        "一键三连！",
+        "空降成功",
+        "笑死哈哈哈哈",
+        "这波操作太秀了",
+        "第一次来，好有趣",
+        "考古成功",
+        "BGM 好评",
+        "已三连",
+        "啊啊啊啊啊",
+        "全体起立",
+        "热乎的",
+        "收藏从未停止"
+      ],
+      "say": "前方高能，一键三连，下次一定。这些梗，都是从弹幕里长出来的。"
+    },
+    {
+      "type": "feature",
+      "kicker": "首页推荐",
+      "title": "打开就有\n**想看的**",
+      "sub": "番剧、知识、游戏、生活，\n首页按你的兴趣来推荐",
+      "image": "brand/shot-desktop.jpg",
+      "frame": "browser",
+      "focus": [
+        0.45,
+        0.45,
+        1.25
+      ],
+      "say": "打开首页，番剧、知识、游戏、生活，推荐都按你的兴趣来。"
+    },
+    {
+      "type": "cards",
+      "title": "**万千分区**\n总有你的圈子",
+      "items": [
+        {
+          "icon": "clapperboard",
+          "label": "番剧国创",
+          "desc": "新番同步追"
+        },
+        {
+          "icon": "graduation-cap",
+          "label": "知识",
+          "desc": "免费的大学"
+        },
+        {
+          "icon": "gamepad-2",
+          "label": "游戏",
+          "desc": "攻略和名场面"
+        },
+        {
+          "icon": "music",
+          "label": "音乐舞蹈",
+          "desc": "翻唱、原创、宅舞"
+        },
+        {
+          "icon": "utensils",
+          "label": "美食生活",
+          "desc": "Vlog 和烟火气"
+        },
+        {
+          "icon": "cpu",
+          "label": "科技数码",
+          "desc": "开箱、评测、AI"
+        }
+      ],
+      "say": "追新番，学知识，看游戏攻略，听音乐。几十个分区，总有一个圈子是你的。"
+    },
+    {
+      "type": "feature",
+      "side": "right",
+      "kicker": "移动端",
+      "title": "随时随地\n**追更**",
+      "sub": "通勤路上看番，睡前看直播",
+      "image": "brand/shot-mobile.jpg",
+      "frame": "phone",
+      "say": "手机上也一样。通勤路上追番，睡前看直播。"
+    },
+    {
+      "type": "stats",
+      "kicker": "2026 年第二季度",
+      "title": "每个月 **3.71 亿**人在这里",
+      "items": [
+        {
+          "value": "3.71亿",
+          "label": "月活跃用户"
+        },
+        {
+          "value": "1.17亿",
+          "label": "日活跃用户"
+        },
+        {
+          "value": "113分钟",
+          "label": "人均每天使用"
+        }
+      ],
+      "say": "每个月有三点七一亿人来到B站，平均每人每天要待上一百一十三分钟。"
+    },
+    {
+      "type": "end",
+      "title": "你感兴趣的视频\n都在**B站**",
+      "cta": "bilibili.com",
+      "say": "哔哩哔哩，干杯！"
+    }
+  ]
+}
