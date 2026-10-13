@@ -31,6 +31,23 @@ STYLE_META = {
     "bento":         ("bouncy",  "zh-CN-XiaoyiNeural", "+4%"),
 }
 
+# 风格 → yovoice（本地开源 TTS，Qwen3-TTS CustomVoice）的音色和演绎描述
+YV_MODEL = "qwen3-tts-customvoice-q8"
+YV_META = {
+    "apple-keynote": ("Uncle_Fu", "产品发布会旁白，沉稳、克制、有质感，语速平缓，句尾干净"),
+    "saas-glow":     ("Serena",   "科技产品宣传片旁白，清晰自信，语气明亮，语速适中偏快"),
+    "kinetic":       ("Dylan",    "短视频广告旁白，年轻有活力，节奏快，带一点兴奋"),
+    "flat-mg":       ("Vivian",   "活泼亲切的产品介绍旁白，语气轻快，带笑意"),
+    "editorial":     ("Serena",   "生活方式品牌片旁白，温柔、从容、有画面感，语速舒缓"),
+    "neo-brutal":    ("Vivian",   "潮流品牌广告旁白，干脆利落，语气自信，有一点俏皮"),
+    "cyber-glitch":  ("Dylan",    "游戏和潮流科技宣传片旁白，酷、有力量感，语速偏快"),
+    "bento":         ("Serena",   "效率工具宣传片旁白，干净利落，亲切自然，语速适中"),
+}
+YV_BIN = [os.environ.get("YOVOICE_BIN", ""), shutil.which("yovoice") or "", str(Path.home() / ".local/opt/yovoice/yovoice")]
+
+def yovoice_bin():
+    return next((b for b in YV_BIN if b and Path(b).exists()), None)
+
 def run(cmd, **kw):
     r = subprocess.run(cmd, capture_output=True, text=True, **kw)
     if r.returncode:
@@ -42,17 +59,34 @@ def dur_of(f):
     return float(run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(f)]).strip())
 
 # ---------- 配音 ----------
-def tts(text, out_wav, engine, voice, rate, cache):
-    """返回实际用的引擎。auto: edge → say；结果按文本哈希缓存。"""
-    key = hashlib.md5(f"v2|{engine}|{voice}|{rate}|{text}".encode()).hexdigest()[:12]
+def tts(text, out_wav, engine, voice, rate, cache, yv=None):
+    """返回实际用的引擎。auto: yovoice（本地开源模型）→ edge → say；结果按文本哈希缓存。"""
+    key = hashlib.md5(f"v5|{engine}|{voice}|{rate}|{yv}|{text}".encode()).hexdigest()[:12]
     cached = cache / f"{key}.wav"
     if cached.exists():
         shutil.copy(cached, out_wav); return json.loads((cache / f"{key}.json").read_text())["engine"]
     used = None
-    for eng in ([engine] if engine != "auto" else ["edge", "say"]):
-        tmp = out_wav.with_suffix(".tmp.mp3" if eng == "edge" else ".tmp.aiff")
+    for eng in ([engine] if engine != "auto" else ["yovoice", "edge", "say"]):
+        tmp = out_wav.with_suffix({"edge": ".tmp.mp3", "say": ".tmp.aiff"}.get(eng, ".tmp.wav"))
         try:
-            if eng == "edge":
+            if eng == "yovoice":
+                yb = yovoice_bin()
+                if not yb: continue
+                model, speaker, desc, seed = yv
+                # 模型原始输出单独缓存：只改后处理（停顿、语速）时不用重新推理
+                raw = cache / ("raw-" + hashlib.md5(f"{yv}|{text}".encode()).hexdigest()[:12] + ".wav")
+                if raw.exists():
+                    shutil.copy(raw, tmp)
+                else:
+                    tf = out_wav.with_suffix(".txt"); tf.write_text(text)
+                    cmd = [yb, "generate", "--model", model, "--language", "zh", "--text-file", str(tf), "--output", str(tmp), "--seed", str(seed), "--json"]
+                    if speaker: cmd += ["--speaker", speaker]
+                    if desc: cmd += ["--voice-description", desc]
+                    r = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+                    tf.unlink(missing_ok=True)
+                    if r.returncode: sys.stderr.write(f"yovoice 失败: {r.stderr[-600:]}\n")
+                    elif tmp.exists(): shutil.copy(tmp, raw)
+            elif eng == "edge":
                 cmd = ["uvx", "--from", "edge-tts", "edge-tts", "--voice", voice, f"--rate={rate}", "--text", text, "--write-media", str(tmp)]
                 subprocess.run(cmd, capture_output=True, timeout=60, check=True)
             elif eng == "say":
@@ -64,18 +98,27 @@ def tts(text, out_wav, engine, voice, rate, cache):
                 subprocess.run(["npx", "-y", "hyperframes", "tts", text, "--voice", voice if voice.startswith("z") else "zf_xiaoxiao", "--output", str(tmp)], capture_output=True, timeout=180, check=True)
             if tmp.exists() and tmp.stat().st_size > 2000:
                 # 统一成 48k 单声道，去掉首尾静音
-                run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(tmp), "-af",
-                     "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
-                     "-ar", "48000", "-ac", "1", str(out_wav)])
+                af = "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse"
+                if eng == "yovoice":
+                    # 模型在顿号、逗号处会停 0.6–0.9 秒，宣传片里太拖：超过 0.18 秒的停顿压到 0.16 秒左右；再按风格语速微调
+                    af = "silenceremove=stop_periods=-1:stop_duration=0.18:stop_threshold=-35dB:stop_silence=0.16:detection=peak:window=0.01," + af
+                    pct = int(re.sub(r"[^\d-]", "", rate or "0") or 0)
+                    if pct: af += f",atempo={1 + pct / 200:.3f}"
+                run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(tmp), "-af", af, "-ar", "48000", "-ac", "1", str(out_wav)])
                 used = eng; break
         except Exception:
             pass
         finally:
             if tmp.exists(): tmp.unlink()
     if not used:
-        raise SystemExit("配音失败：edge-tts 和 say 都不可用。可以在 brief 里给每场写 \"voiceFile\" 用自己的录音，或 voice.engine 设为 none。")
+        raise SystemExit("配音失败：yovoice、edge-tts 和 say 都不可用。可以在 brief 里给每场写 \"voiceFile\" 用自己的录音，或 voice.engine 设为 none。")
     shutil.copy(out_wav, cached); (cache / f"{key}.json").write_text(json.dumps({"engine": used}))
     return used
+
+# 旁白里的读音标注：{字幕写法|配音读法}，如 {Cue|Q}、{3.71 亿|三点七一亿}。字幕用前者，配音用后者
+READ = re.compile(r"\{([^{}|]+)\|([^{}]+)\}")
+shown = lambda s: READ.sub(r"\1", s)
+spoken = lambda s: READ.sub(r"\2", s)
 
 def cues_for(text, dur):
     """把旁白切成字幕句，按字数分配时长（相对旁白开头）。"""
@@ -116,7 +159,8 @@ def icon_svg(name):
         raise SystemExit(f"没有图标 {name!r}。图标用 Lucide 的名字（https://lucide.dev/icons），相近的有: {', '.join(near) or '无'}"
                          + ("" if ICON_DIR.exists() else "\n先在 scripts/ 下运行 npm install"))
     svg = re.sub(r"<!--.*?-->", "", f.read_text(), flags=re.S).strip()
-    return re.sub(r'\s(class|width|height)="[^"]*"', "", svg)
+    head, rest = svg.split(">", 1)   # 只去掉根 <svg> 上的尺寸，里面 <rect> 的 width/height 要留着
+    return re.sub(r'\s(class|width|height)="[^"]*"', "", head) + ">" + rest
 
 # ---------- 素材 ----------
 def load_logo(p, mono):
@@ -160,6 +204,8 @@ def main():
     engine = "none" if a.no_voice else vcfg.get("engine", "auto")
     voice = vcfg.get("voice") or edge_voice
     rate = vcfg.get("rate") or edge_rate
+    yv_spk, yv_desc = YV_META[style]
+    yv = (vcfg.get("model", YV_MODEL), vcfg.get("speaker", yv_spk), vcfg.get("description", yv_desc), vcfg.get("seed", 7))
 
     # 复制图片素材，路径改成相对 index.html
     copied = {}
@@ -179,8 +225,10 @@ def main():
     scenes, engines = [], set()
     for i, s in enumerate(B["scenes"]):
         d = dict(s)
-        for k in ("image",):
-            if d.get(k): d[k] = asset(d[k])
+        if d.get("image"):
+            wh = run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=p=0", str((base / d["image"]).resolve())]).strip().split(",")
+            d["imageAR"] = round(int(wh[0]) / int(wh[1]), 4)
+            d["image"] = asset(d["image"])
         if d.get("images"): d["images"] = [asset(x) for x in d["images"]]
         if d.get("items"):
             items = []
@@ -196,12 +244,13 @@ def main():
         if d.get("voiceFile"):
             run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(base / d.pop("voiceFile")), "-ar", "48000", "-ac", "1", str(vf)]); engines.add("file")
         elif text and engine != "none":
-            engines.add(tts(text, vf, engine, voice, rate, cache))
+            sd = d.pop("seed", yv[3]); sd = sd.get(style, yv[3]) if isinstance(sd, dict) else sd   # 种子可以按风格分别写：{"flat-mg": 11}
+            engines.add(tts(spoken(text), vf, engine, voice, rate, cache, yv[:3] + (sd,)))
         if vf.exists():
             vd = dur_of(vf)
-            d["voice"] = {"file": f"voice/{vf.name}", "dur": round(vd, 3), "text": text, "cues": cues_for(text, vd) if text else []}
+            d["voice"] = {"file": f"voice/{vf.name}", "dur": round(vd, 3), "text": shown(text), "cues": cues_for(shown(text), vd) if text else []}
         scenes.append(d)
-    print(f"配音: {', '.join(engines) or '无'}  ({len([s for s in scenes if s.get('voice')])} 段)")
+    print(f"配音: {', '.join(engines) or '无'}{('（' + yv[0] + ' / ' + yv[1] + '）') if 'yovoice' in engines else ''}  ({len([s for s in scenes if s.get('voice')])} 段)")
 
     PV = {"W": W, "H": H, "fps": a.fps, "style": style, "brand": brand, "scenes": scenes,
           "captions": B.get("captions", True), "tokens": B.get("tokens", {})}

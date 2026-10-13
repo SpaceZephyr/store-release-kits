@@ -69,8 +69,8 @@
 .st-neo-brutal .card, .st-neo-brutal .frame-browser, .st-neo-brutal .frame-phone, .st-neo-brutal .tag, .st-neo-brutal .cta, .st-neo-brutal .stat { border: 5px solid #111; }
 .st-neo-brutal .frame-browser .bar { border-bottom: 5px solid #111; }
 .st-neo-brutal .kicker { display: inline-block; background: #111; color: #fff; padding: 8px 20px; transform: rotate(-2deg); }
-.st-neo-brutal .title em { background: var(--accent2); color: #fff; padding: 0 .15em; font-style: normal; }
-.st-neo-brutal .ch-em { color: var(--accent); }
+.st-neo-brutal .title em { color: #111; padding: 0 .15em; font-style: normal; }
+.st-neo-brutal .ch-em, .st-neo-brutal .title em .ch { color: #111; }
 .st-neo-brutal .tag { box-shadow: 8px 8px 0 #111; border-radius: 12px; background: #fff; color: #111; }
 .st-neo-brutal .tag-a { background: var(--accent); color: #111; } .st-neo-brutal .tag-b { background: var(--accent2); color: #fff; }
 .st-neo-brutal .stat { background: #fff; box-shadow: 10px 10px 0 #111; border-radius: 18px; padding: 40px 20px; }
@@ -110,3 +110,18 @@
 .st-cyber-glitch .card-icon { --iconBg: transparent; border: 1px solid var(--accent); --iconRadius: 0; filter: drop-shadow(0 0 10px var(--accent)); }
 .st-apple-keynote .card-icon { --iconBg: rgba(255,255,255,.06); --iconStroke: 1.5; }
 .st-saas-glow .card-icon { --iconBg: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); --iconColor: var(--accent2); }
+
+/* v2 皮肤 */
+.st-apple-keynote .ring { --ringC: rgba(255,255,255,.35); }
+.st-neo-brutal .lens { box-shadow: 0 0 0 5px #111, 14px 14px 0 #111; border-radius: 14px; }
+.st-neo-brutal .callout { background: #111; color: #fff; border-radius: 10px; }
+.st-neo-brutal .ring { border-width: 6px; }
+.st-neo-brutal .ghost { -webkit-text-stroke: 3px rgba(17,17,17,.12); }
+.st-editorial .lens { border-radius: 2px; box-shadow: 0 0 0 2px var(--fg), 0 30px 80px rgba(60,40,10,.25); }
+.st-editorial .callout { border-radius: 0; background: var(--fg); color: var(--bg); font-family: var(--display); }
+.st-editorial .ring { border-width: 1.5px; --ringC: var(--fg); }
+.st-editorial .ghost { -webkit-text-stroke: 1.5px rgba(26,26,26,.10); font-style: italic; }
+.st-cyber-glitch .lens { border-radius: 0; box-shadow: 0 0 0 2px var(--accent), 0 0 60px color-mix(in srgb, var(--accent) 60%, transparent); }
+.st-bento .lens { border-radius: 28px; box-shadow: 0 0 0 6px #fff, 0 40px 90px rgba(0,0,0,.18); }
+.st-bento .ghost { -webkit-text-stroke: 2px rgba(0,0,0,.05); }
+.st-kinetic .ghost { -webkit-text-stroke: 3px rgba(255,255,255,.18); }

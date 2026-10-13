@@ -4,8 +4,9 @@ html, body { width: var(--W); height: var(--H); overflow: hidden; background: #0
 body { font-family: var(--font, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", system-ui, sans-serif); color: var(--fg); -webkit-font-smoothing: antialiased; }
 #stage { position: absolute; inset: 0; width: var(--W); height: var(--H); overflow: hidden; background: var(--bg); transform-origin: 0 0; }
 #bg, #fx, #cap { position: absolute; inset: 0; pointer-events: none; }
-#bg { z-index: 0; overflow: hidden; }
-.scene { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 120px 140px; will-change: transform, opacity; }
+#bg { z-index: 0; overflow: hidden; inset: -8%; }
+.scene-wrap { position: absolute; inset: 0; z-index: 1; overflow: hidden; will-change: transform, opacity; }
+.scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 120px 140px; will-change: transform, opacity; }
 #fx { z-index: 5; display: none; }
 #cap { z-index: 6; top: auto; bottom: 64px; text-align: center; transition: none; }
 #cap span { display: inline-block; max-width: 70%; padding: 10px 26px; border-radius: 10px; font-size: 38px; font-weight: 500; line-height: 1.4; color: var(--capFg, #fff); background: var(--capBg, rgba(0,0,0,.55)); }
@@ -125,3 +126,45 @@ body { font-family: var(--font, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC
 .grid.n5 .card-icon, .grid.n6 .card-icon { width: 92px; height: 92px; padding: 19px; }
 .grid.n5 .card, .grid.n6 .card { padding: 24px 30px; }
 .grid.n5 .card-label, .grid.n6 .card-label { font-size: 48px; }
+
+/* ---------- 动效 v2：镜头、放大镜、冲击波、背景大字 ---------- */
+.logo { position: relative; }
+.sheen { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.9) 50%, transparent 62%) 130% 0 / 260% 100% no-repeat;
+  -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.ring { position: absolute; left: 50%; top: 50%; width: 320px; height: 320px; border-radius: 50%; border: 3px solid var(--ringC, var(--accent)); opacity: 0; pointer-events: none; z-index: 0; }
+.ghost { position: absolute; left: 0; top: 50%; z-index: 0; white-space: nowrap; pointer-events: none; opacity: 0; font-family: var(--display, inherit); font-weight: 900; font-size: 300px; line-height: 1;
+  color: transparent; -webkit-text-stroke: 2px var(--ghostC, color-mix(in srgb, var(--fg) 16%, transparent)); }
+.port .ghost { font-size: 220px; }
+.copy, .logo, .tagline, .cta { position: relative; z-index: 2; }
+.grid, .stats { z-index: 2; }
+.copy.top, .copy.mid { position: absolute; }
+.stat { position: relative; }
+.stat-bar { display: block; height: 8px; width: 38%; margin: 22px auto 0; border-radius: 4px; background: var(--accent); transform: scaleX(0); }
+.card { outline: calc(var(--lift, 0) * 5px) solid var(--accent); outline-offset: 8px; }
+
+/* 截图：外层 mwrap 放截图和放大镜 */
+.mwrap { position: relative; z-index: 1; flex: 0 0 auto; }
+.mwrap .media { width: auto; }
+.mwrap .screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.mwrap .frame-phone { height: 860px; }
+.port .mwrap .frame-phone { height: 1100px; width: auto; }
+.spot { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle at var(--fx) var(--fy), transparent 0 16%, rgba(0,0,0,.36) 38%); }
+.lens { position: absolute; z-index: 3; opacity: 0; border-radius: var(--lensRadius, 22px); background-repeat: no-repeat; background-color: #fff;
+  box-shadow: 0 0 0 5px var(--accent), 0 40px 90px rgba(0,0,0,.4); }
+.callout { position: absolute; left: 0; right: 0; bottom: -34px; margin: 0 auto; width: max-content; padding: 10px 26px; border-radius: 999px; background: var(--accent); color: var(--onAccent, #fff); font-size: 30px; font-weight: 700; }
+
+/* 功能场版式：split 左右分；hero 先大字后截图；stack 竖版上下 */
+.t-feature.lay-hero { display: block; padding: 0; }
+.lay-hero .hero-copy { position: absolute; top: 62px; left: 0; right: 0; margin: 0 auto; max-width: 86%; text-align: center; }
+.lay-hero .hero-copy .title { font-size: var(--secSize, 76px); }
+.lay-hero .hero-copy .title br { display: none; }
+.lay-hero .hero-copy .kicker { margin-bottom: 12px; }
+.lay-hero .hero-copy .sub { display: none; }
+.lay-hero .mwrap { position: absolute; left: 0; right: 0; top: 262px; margin: 0 auto; }
+
+/* 重点词划线 */
+.mark-bar .title em { background: linear-gradient(var(--markC, color-mix(in srgb, var(--accent2) 38%, transparent)), var(--markC, color-mix(in srgb, var(--accent2) 38%, transparent))) no-repeat 0 90% / var(--mk, 0%) 32%; }
+.mark-underline .title em { background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 98% / var(--mk, 0%) 6px; }
+.mark-block .title em { background: linear-gradient(var(--accent2), var(--accent2)) no-repeat 0 0 / var(--mk, 0%) 100%; }
+.t-feature.side-left .copy, .t-feature.side-right .copy { max-width: 38%; }
+.t-feature.side-left, .t-feature.side-right { gap: 60px; }
