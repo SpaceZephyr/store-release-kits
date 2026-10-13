@@ -72,14 +72,36 @@ npx skills add SpaceZephyr/store-release-kits
 
 ### 案例
 
-五个真实产品，素材都从官网和官方发布文章里来。点图片下载成片，全部视频在
-[Releases](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)。
+五个真实产品，素材都从官网和官方发布文章里来。下面的动图截取了每一场的开头，点动图下载完整成片（带配音），
+全部视频在 [Releases](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)。
 
 **哔哩哔哩**：同一份脚本出了四种风格和一个竖版，用来对比风格差异。数据来自 2026 年第二季度财报。
 
-[![哔哩哔哩 flat-mg](product-promo-video/examples/bilibili/preview-flat-mg.jpg)](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4)
+<a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-flat-mg-16x9.gif" alt="哔哩哔哩 flat-mg" width="100%"></a>
 
-[![哔哩哔哩 kinetic / saas-glow / cyber-glitch](product-promo-video/examples/bilibili/preview-styles.jpg)](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)
+<table>
+  <tr>
+    <td width="50%" align="center"><b>kinetic</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-kinetic-16x9.gif" alt="kinetic"></a></td>
+    <td width="50%" align="center"><b>saas-glow</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-saas-glow-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-saas-glow-16x9.gif" alt="saas-glow"></a></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><b>cyber-glitch</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-cyber-glitch-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-cyber-glitch-16x9.gif" alt="cyber-glitch"></a></td>
+    <td width="50%" align="center"><b>kinetic 竖版</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-9x16.mp4"><img src="product-promo-video/examples/bilibili/bilibili-kinetic-9x16.gif" alt="kinetic 竖版" width="48%"></a></td>
+  </tr>
+</table>
+
+**四个 AI 智能体产品**：都是 2026 年 8–9 月发布的，各用一种风格。
+
+<table>
+  <tr>
+    <td width="50%" align="center"><b>Meta Muse · bento</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4"><img src="product-promo-video/examples/muse/muse-bento-16x9.gif" alt="Meta Muse · bento"></a></td>
+    <td width="50%" align="center"><b>Grok Bot · editorial</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4"><img src="product-promo-video/examples/grok-bot/grok-bot-editorial-16x9.gif" alt="Grok Bot · editorial"></a></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><b>OpenAI dots · apple-keynote</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4"><img src="product-promo-video/examples/dots/dots-apple-keynote-16x9.gif" alt="OpenAI dots · apple-keynote"></a></td>
+    <td width="50%" align="center"><b>Manus Cue · neo-brutal</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4"><img src="product-promo-video/examples/cue/cue-neo-brutal-16x9.gif" alt="Manus Cue · neo-brutal"></a></td>
+  </tr>
+</table>
 
 | 产品 | 风格 | 时长 | 成片 |
 | --- | --- | --- | --- |
@@ -91,17 +113,6 @@ npx skills add SpaceZephyr/store-release-kits
 | SpaceXAI Grok Bot | `editorial` | 44s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4) |
 | OpenAI dots | `apple-keynote` | 45s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4) |
 | Manus Cue | `neo-brutal` | 39s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4) |
-
-<table>
-  <tr>
-    <td width="50%"><b>Meta Muse · bento</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4"><img src="product-promo-video/examples/muse/preview.jpg" alt="Muse"></a></td>
-    <td width="50%"><b>Grok Bot · editorial</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4"><img src="product-promo-video/examples/grok-bot/preview.jpg" alt="Grok Bot"></a></td>
-  </tr>
-  <tr>
-    <td width="50%"><b>OpenAI dots · apple-keynote</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4"><img src="product-promo-video/examples/dots/preview.jpg" alt="dots"></a></td>
-    <td width="50%"><b>Manus Cue · neo-brutal</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4"><img src="product-promo-video/examples/cue/preview.jpg" alt="Cue"></a></td>
-  </tr>
-</table>
 
 每个案例的脚本、用到的素材和制作说明在 [`product-promo-video/examples/`](product-promo-video/examples/)。
 
