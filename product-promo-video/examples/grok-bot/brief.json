@@ -14,7 +14,9 @@
   "format": "16:9",
   "captions": true,
   "voice": {
-    "engine": "auto"
+    "engine": "auto",
+    "speaker": "Dylan",
+    "description": "科技产品宣传片旁白，沉稳自信，清晰有力，语速适中"
   },
   "bgm": "auto",
   "css": ".logo img { filter: brightness(0); } .t-logo .logo { width: 760px; } .t-end .logo { width: 520px; }",
@@ -22,23 +24,30 @@
     {
       "type": "logo",
       "tagline": "能交付真活儿的 AI 队友",
-      "say": "Grok Bot，能交付真活儿的 AI 队友。"
+      "say": "{Grok Bot|格罗克波特}，能交付真活儿的 AI 队友。"
     },
     {
       "type": "slogan",
       "kicker": "AUG 11, 2026 · BETA",
       "title": "一支**全天候**在线的\n智能体团队",
       "sub": "它们有自己的电脑，像你一样使用工具和应用",
-      "say": "Grok Bot 是一支全天候在线的智能体团队。它们有自己的电脑，像你一样登录工具、操作应用。"
+      "say": "{Grok Bot|格罗克波特} 是一支全天候在线的智能体团队。它们有自己的电脑，像你一样登录工具、操作应用。"
     },
     {
       "type": "feature",
       "kicker": "MEET GROK BOT",
       "title": "像同事一样\n**发消息**",
       "sub": "交代任务，它把整件事做完，\n只在需要你批准时回来找你",
-      "image": "brand/ui-app.jpg",
+      "image": "brand/ui-app.png",
       "frame": "none",
-      "say": "像给同事发消息一样交代任务。它把整件事做完，只在需要你批准的时候回来找你。"
+      "say": "像给同事发消息一样交代任务。它把整件事做完，只在需要你批准的时候回来找你。",
+      "focus": [
+        0.47,
+        0.43,
+        1.7
+      ],
+      "focusAt": "把整件事做完",
+      "callout": "52 个客户 · 36 份草稿"
     },
     {
       "type": "cards",
@@ -75,7 +84,7 @@
           "desc": "复现问题、提交修复"
         }
       ],
-      "say": "一个 Bot 当总管，其余各管一摊：外联、收件箱、招聘、报销、修 bug，彼此之间自己协作。"
+      "say": "一个 {Bot|波特} 当总管，其余各管一摊：外联、收件箱、招聘、报销、修 bug，彼此之间自己协作。"
     },
     {
       "type": "feature",
@@ -83,18 +92,25 @@
       "kicker": "SHOW A BOT HOW IT'S DONE",
       "title": "演示一次\n**以后它来做**",
       "sub": "它跟着你做一遍，存成流程，\n下次自己完成",
-      "image": "brand/ui-teach.jpg",
+      "image": "brand/ui-teach.png",
       "frame": "none",
-      "say": "把流程演示一遍，它会记下来，下次自己完成。"
+      "say": "把流程演示一遍，它会记下来，下次自己完成。",
+      "focus": [
+        0.86,
+        0.4,
+        2.0
+      ],
+      "focusAt": "记下来",
+      "callout": "Teach a task"
     },
     {
       "type": "gallery",
       "title": "你离开电脑\n它**继续工作**",
       "images": [
-        "brand/img-01.jpg",
-        "brand/img-02.jpg",
-        "brand/img-03.jpg",
-        "brand/img-04.jpg"
+        "brand/img-01.webp",
+        "brand/img-02.webp",
+        "brand/img-03.webp",
+        "brand/img-04.webp"
       ],
       "say": "你离开电脑，它在云端继续工作。"
     },
@@ -103,7 +119,7 @@
       "title": "能交付真活儿的 AI 队友",
       "sub": "测试版，支持桌面端与 iOS",
       "cta": "x.ai/bot",
-      "say": "Grok Bot，现已开放测试。"
+      "say": "{Grok Bot|格罗克波特}，现已开放测试。"
     }
   ]
 }

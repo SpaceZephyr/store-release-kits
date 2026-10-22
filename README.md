@@ -19,7 +19,7 @@
 
 | Skill | 做什么 | 主要产出 |
 | --- | --- | --- |
-| [`product-promo-video`](product-promo-video/) | 产品宣传视频 | 从官网抓 logo、slogan、主色、界面图，生成带动效、配音、字幕、配乐的宣传片。八种动效风格，横竖版一键切换 |
+| [`product-promo-video`](product-promo-video/) | 产品宣传视频 | 从官网抓 logo、slogan、主色、界面图，生成带镜头运动、本地开源 TTS 配音、字幕、配乐的宣传片。八种动效风格，横竖版一键切换 |
 | [`store-promo-shots`](store-promo-shots/) | 商店宣传图 | 把真实截图批量合成成宣传图：八种版式、六套主题，一次出全套尺寸 |
 | [`app-store-release-kit`](app-store-release-kit/) | Apple App Store 上架 | App 图标、多设备截图、元数据、App Privacy、Review Notes、TestFlight 与发布检查 |
 | [`wechat-miniprogram-store-kit`](wechat-miniprogram-store-kit/) | 微信小程序上架 | 小程序图标、功能截图、审核资料、隐私保护指引矩阵、域名与资质检查、发布物料包 |
@@ -51,62 +51,76 @@ npx skills add SpaceZephyr/store-release-kits
 1. **抓素材**：用真实浏览器打开官网，拿到 logo（优先矢量 SVG）、主色、标题和描述、桌面和手机截图、正文里的界面图。
    logo 只出现在宣传图里时，用 `extract_logo.py` 抠成透明底。
 2. **写脚本**：`brief.json` 里每一场写屏幕文案和旁白。logo、slogan、使用场景、真实界面都要出现，数据要有出处。
-3. **配音和配乐**：旁白用 edge-tts，不可用时退回 macOS 婷婷；每一场的时长跟着旁白走。配乐按风格合成，旁白响起时自动压低。
-4. **渲染**：画面是 HTML/CSS 动效，无头 Chrome 逐帧截图后交给 ffmpeg，文字清晰，每一帧都能复现。
-   先出每场静帧检查，再出成片。
+3. **配音**：用本地开源 TTS [yovoice](https://github.com/leemysw/yovoice) 跑 Qwen3-TTS（Apache-2.0），不用账号、不联网。
+   英文产品名用 `{Grok Bot|格罗克波特}` 标读音；出片前用 Whisper 把配音识别回文字逐场比对，念错的场换种子重配。
+   每一场的时长跟着旁白走，配乐按风格合成，旁白响起时自动压低。
+4. **动效**：不是一页页翻的 PPT。每场有自己的镜头（推、拉、横移、快推、慢漂，相邻两场动作不同）；
+   卡片、数字在旁白念到时才落下；截图会被推近，并弹出放大镜标出重点；转场在每种风格的一组转场里轮换。
+5. **渲染**：画面是 HTML/CSS，无头 Chrome 逐帧截图后交给 ffmpeg，文字清晰，每一帧都能复现。先出每场静帧检查，再出成片。
 
 八种动效风格，同一份脚本加 `--style` 就能换，加 `--format 9:16` 出竖版：
 
 | 风格 | 画面 | 适合 |
 | --- | --- | --- |
-| `apple-keynote` | 黑底大字，模糊淡入，节奏慢 | 硬件、旗舰功能、高端品牌 |
-| `saas-glow` | 深色光斑网格，截图 3D 立起来 | 软件、AI、开发者工具 |
-| `kinetic` | 巨字砸入，闪切，每场换底色 | 短视频投放、活动、年轻品牌 |
+| `apple-keynote` | 黑底大字，模糊推进，截图从下方立起 | 硬件、旗舰功能、高端品牌 |
+| `saas-glow` | 深色光斑网格，逐字翻起，卡片 3D 发牌 | 软件、AI、开发者工具 |
+| `kinetic` | 逐字砸入，甩镜旋转转场，每场换底色 | 短视频投放、活动、年轻品牌 |
 | `flat-mg` | 几何图形漂浮，逐字弹跳，色块转场 | 消费 App、社区、教育 |
-| `editorial` | 纸感衬线，遮罩上推，页码 | 内容、文化、生活方式 |
+| `editorial` | 纸感衬线，遮罩上推，强调色下划线 | 内容、文化、生活方式 |
 | `neo-brutal` | 粗描边硬投影，阶梯运动 | 独立开发、创意工具 |
 | `cyber-glitch` | 霓虹扫描线，乱码解码，故障转场 | 游戏、电竞、潮流科技 |
-| `bento` | 浅灰圆角卡片，缩放入场 | 功能多的产品、效率工具 |
+| `bento` | 浅灰圆角卡片，3D 翻入，念到的卡片抬起 | 功能多的产品、效率工具 |
 
 片子里不出现 emoji，卡片图标用 [Lucide](https://lucide.dev/icons) 线性图标，渲染前会自动扫描整份脚本。
 
 ### 案例
 
-五个真实产品，素材都从官网和官方发布文章里来。点图片下载成片，全部视频在
-[Releases](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)。
+五个真实产品，素材都从官网和官方发布文章里来。下面的动图截取了每一场的开头，点动图下载完整成片（带配音），
+全部视频在 [Releases](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)。
 
 **哔哩哔哩**：同一份脚本出了四种风格和一个竖版，用来对比风格差异。数据来自 2026 年第二季度财报。
 
-[![哔哩哔哩 flat-mg](product-promo-video/examples/bilibili/preview-flat-mg.jpg)](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4)
-
-[![哔哩哔哩 kinetic / saas-glow / cyber-glitch](product-promo-video/examples/bilibili/preview-styles.jpg)](https://github.com/SpaceZephyr/store-release-kits/releases/tag/product-promo-video-examples)
-
-| 产品 | 风格 | 时长 | 成片 |
-| --- | --- | --- | --- |
-| 哔哩哔哩 | `flat-mg` | 47s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4) |
-| 哔哩哔哩 | `kinetic` | 41s | [横版](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-16x9.mp4) · [竖版](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-9x16.mp4) |
-| 哔哩哔哩 | `saas-glow` | 47s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-saas-glow-16x9.mp4) |
-| 哔哩哔哩 | `cyber-glitch` | 45s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-cyber-glitch-16x9.mp4) |
-| Meta Muse | `bento` | 40s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4) |
-| SpaceXAI Grok Bot | `editorial` | 44s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4) |
-| OpenAI dots | `apple-keynote` | 45s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4) |
-| Manus Cue | `neo-brutal` | 39s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4) |
+<a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-flat-mg-16x9.gif" alt="哔哩哔哩 flat-mg" width="100%"></a>
 
 <table>
   <tr>
-    <td width="50%"><b>Meta Muse · bento</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4"><img src="product-promo-video/examples/muse/preview.jpg" alt="Muse"></a></td>
-    <td width="50%"><b>Grok Bot · editorial</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4"><img src="product-promo-video/examples/grok-bot/preview.jpg" alt="Grok Bot"></a></td>
+    <td width="50%" align="center"><b>kinetic</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-kinetic-16x9.gif" alt="kinetic"></a></td>
+    <td width="50%" align="center"><b>saas-glow</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-saas-glow-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-saas-glow-16x9.gif" alt="saas-glow"></a></td>
   </tr>
   <tr>
-    <td width="50%"><b>OpenAI dots · apple-keynote</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4"><img src="product-promo-video/examples/dots/preview.jpg" alt="dots"></a></td>
-    <td width="50%"><b>Manus Cue · neo-brutal</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4"><img src="product-promo-video/examples/cue/preview.jpg" alt="Cue"></a></td>
+    <td width="50%" align="center"><b>cyber-glitch</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-cyber-glitch-16x9.mp4"><img src="product-promo-video/examples/bilibili/bilibili-cyber-glitch-16x9.gif" alt="cyber-glitch"></a></td>
+    <td width="50%" align="center"><b>kinetic 竖版</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-9x16.mp4"><img src="product-promo-video/examples/bilibili/bilibili-kinetic-9x16.gif" alt="kinetic 竖版" width="48%"></a></td>
   </tr>
 </table>
+
+**四个 AI 智能体产品**：都是 2026 年 8–9 月发布的，各用一种风格。
+
+<table>
+  <tr>
+    <td width="50%" align="center"><b>Meta Muse · bento</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4"><img src="product-promo-video/examples/muse/muse-bento-16x9.gif" alt="Meta Muse · bento"></a></td>
+    <td width="50%" align="center"><b>Grok Bot · editorial</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4"><img src="product-promo-video/examples/grok-bot/grok-bot-editorial-16x9.gif" alt="Grok Bot · editorial"></a></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><b>OpenAI dots · apple-keynote</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4"><img src="product-promo-video/examples/dots/dots-apple-keynote-16x9.gif" alt="OpenAI dots · apple-keynote"></a></td>
+    <td width="50%" align="center"><b>Manus Cue · neo-brutal</b><br><a href="https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4"><img src="product-promo-video/examples/cue/cue-neo-brutal-16x9.gif" alt="Manus Cue · neo-brutal"></a></td>
+  </tr>
+</table>
+
+| 产品 | 风格 | 时长 | 成片 |
+| --- | --- | --- | --- |
+| 哔哩哔哩 | `flat-mg` | 56s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-flat-mg-16x9.mp4) |
+| 哔哩哔哩 | `kinetic` | 41s | [横版](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-16x9.mp4) · [竖版](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-kinetic-9x16.mp4) |
+| 哔哩哔哩 | `saas-glow` | 45s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-saas-glow-16x9.mp4) |
+| 哔哩哔哩 | `cyber-glitch` | 44s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/bilibili-cyber-glitch-16x9.mp4) |
+| Meta Muse | `bento` | 43s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/muse-bento-16x9.mp4) |
+| SpaceXAI Grok Bot | `editorial` | 47s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/grok-bot-editorial-16x9.mp4) |
+| OpenAI dots | `apple-keynote` | 51s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/dots-apple-keynote-16x9.mp4) |
+| Manus Cue | `neo-brutal` | 46s | [下载](https://github.com/SpaceZephyr/store-release-kits/releases/download/product-promo-video-examples/cue-neo-brutal-16x9.mp4) |
 
 每个案例的脚本、用到的素材和制作说明在 [`product-promo-video/examples/`](product-promo-video/examples/)。
 
 > 这些案例只用来演示 Skill，不是各公司的官方宣传片，logo、截图和产品名称的权利归各自公司所有。
-> 配音是 macOS 婷婷（制作时 edge-tts 返回 403），配乐是脚本合成的临时曲，正式使用请换真人录音和授权音乐。
+> 配音是本机的 Qwen3-TTS（yovoice），已用 Whisper 逐场校验；配乐是脚本合成的临时曲，正式投放请换授权音乐。
 
 ---
 

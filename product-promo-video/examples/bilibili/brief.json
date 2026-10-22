@@ -22,7 +22,13 @@
     {
       "type": "logo",
       "tagline": "你感兴趣的视频都在B站",
-      "say": "哔哩哔哩。你感兴趣的视频，都在B站。"
+      "say": "哔哩哔哩。你感兴趣的视频，都在B站。",
+      "seed": {
+        "flat-mg": 11,
+        "kinetic": 11,
+        "saas-glow": 23,
+        "cyber-glitch": 31
+      }
     },
     {
       "type": "slogan",
@@ -64,7 +70,7 @@
       "kicker": "首页推荐",
       "title": "打开就有\n**想看的**",
       "sub": "番剧、知识、游戏、生活，\n首页按你的兴趣来推荐",
-      "image": "brand/shot-desktop.jpg",
+      "image": "brand/shot-desktop.png",
       "frame": "browser",
       "focus": [
         0.45,
@@ -116,7 +122,7 @@
       "kicker": "移动端",
       "title": "随时随地\n**追更**",
       "sub": "通勤路上看番，睡前看直播",
-      "image": "brand/shot-mobile.jpg",
+      "image": "brand/shot-mobile.png",
       "frame": "phone",
       "say": "手机上也一样。通勤路上追番，睡前看直播。"
     },
